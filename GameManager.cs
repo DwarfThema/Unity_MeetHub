@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
     public string weather = "Clouds";
     public string location = "Seongnam-si";
 
-    public string date = "2022. 10. 29.";
-    int year;
-    int month;
-    int day;
+    public string date = "10/29/2022";
+    string year;
+    string month;
+    string day;
 
     public string username = "username";
     public string commit;
@@ -64,12 +64,20 @@ public class GameManager : MonoBehaviour
 
     public void GetDate(string getDate)
     {
-        string[] dateData = getDate.Split(". ");
-        year = int.Parse(dateData[0]);
-        month = int.Parse(dateData[1]);
+        string[] dateData = getDate.Split("/");
+        month = dateData[0];
+        day = dateData[1];
+        year = dateData[2];
 
-        string[] dateDotData = dateData[2].Split(".");
-        day = int.Parse(dateDotData[0]);
+        Debug.Log(month);
+        Debug.Log(day);
+        Debug.Log(year);
+
+
+        //string[] dateDotData = dateData[2].Split(".");
+
+        Weatehr();
+        Spawn();
     }
 
     public void GetUsername(string getUsername)
@@ -87,15 +95,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        GetDate(date);
-        GetCommit(commit);
-        GetUsername(username);
-        GetTemperature(temperature);
-        GetWeather(weather);
-        GetLocation(location);
+         //  GetDate(date);
+         //GetCommit(commit);
+         //GetUsername(username);
+         //GetTemperature(temperature);
+         //GetWeather(weather);
+         //GetLocation(location);
 
-        Weatehr();
-        Spawn();
     }
 
     private void Update()
@@ -106,7 +112,7 @@ public class GameManager : MonoBehaviour
     public void Weatehr()
     {
 
-        if (month == 3 || month == 4 || month == 5)
+        if (month == "03" || month == "04" || month == "05")
         {
             Debug.Log(LawnOBJ.Length);
             Debug.Log("봄");
@@ -120,7 +126,7 @@ public class GameManager : MonoBehaviour
             TreeOBJ[1] = Resources.Load("1Spring/Tree/TreeB") as GameObject;
 
         }
-        else if (month == 6 || month == 7 || month == 8)
+        else if (month == "06" || month == "07" || month == "08")
         {
             Debug.Log("여름");
             groundMtl.material = Resources.Load("2Summer/Ground_SM") as Material;
@@ -133,7 +139,7 @@ public class GameManager : MonoBehaviour
             TreeOBJ[0] = Resources.Load("2Summer/Tree/TreeA") as GameObject;
             TreeOBJ[1] = Resources.Load("2Summer/Tree/TreeB") as GameObject;
         }
-        else if (month == 9 || month == 10 || month == 11)
+        else if (month == "09" || month == "10" || month == "11")
         {
             Debug.Log("가을");
             groundMtl.material = Resources.Load("3Fall/Ground_FL") as Material;
@@ -146,7 +152,7 @@ public class GameManager : MonoBehaviour
             TreeOBJ[0] = Resources.Load("3Fall/Tree/TreeA") as GameObject;
             TreeOBJ[1] = Resources.Load("3Fall/Tree/TreeB") as GameObject;
         }
-        else if (month == 12 || month == 1 || month == 2)
+        else if (month == "12" || month == "01" || month == "02")
         {
             Debug.Log("겨울");
             groundMtl.material = Resources.Load("4Winter/Ground_WT") as Material;

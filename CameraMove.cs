@@ -35,7 +35,7 @@ public class CameraMove : MonoBehaviour
         else if (transform.position.z < -50)
         {
             active = false;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 50);
+            transform.position = new Vector3(transform.position.x, transform.position.y, -50);
         }
         else
         {
