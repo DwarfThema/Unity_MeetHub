@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public string GameSeed = "Default";
+    public int CurrentSeed = 0;
+
     public string temperature = "19.9°C";
     public string weather = "Clouds";
     public string location = "Seongnam-si";
@@ -21,17 +24,20 @@ public class GameManager : MonoBehaviour
 
     public int zoneSize;
 
-    public GameObject[] LawnOBJ;
-    public int LawnCount;
+    GameObject[] LawnOBJ;
+    int LawnCount;
     GameObject LawnSelected;
 
-    public GameObject[] FlowerOBJ;
+    GameObject[] FlowerOBJ;
     int FlowerCount;
-    public GameObject FlowerSelected;
+    GameObject FlowerSelected;
 
-    public GameObject[] TreeOBJ;
+    GameObject[] TreeOBJ;
     int TreeCount;
     GameObject TreeSelected;
+
+
+    public GameObject ui;
 
 
 
@@ -64,6 +70,8 @@ public class GameManager : MonoBehaviour
 
     public void GetDate(string getDate)
     {
+        Refreash();
+
         string[] dateData = getDate.Split("/");
         month = dateData[0];
         day = dateData[1];
@@ -77,7 +85,7 @@ public class GameManager : MonoBehaviour
         //string[] dateDotData = dateData[2].Split(".");
 
         Weatehr();
-        Spawn();
+        //Spawn();
     }
 
     public void GetUsername(string getUsername)
@@ -88,6 +96,23 @@ public class GameManager : MonoBehaviour
     public void GetCommit(string getStringCommit)
     {
         commit = getStringCommit;
+        Spawn();
+    }
+
+    public void Refreash()
+    {
+        Transform[] childList = this.GetComponentsInChildren<Transform>();
+
+        if(childList != null)
+        {
+            for(int i = 1; i<childList.Length; i++)
+            {
+                if (childList[i] != this.transform)
+                {
+                    Destroy(childList[i].gameObject);
+                }
+            }
+        }
     }
 
 
@@ -95,12 +120,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-         //  GetDate(date);
-         //GetCommit(commit);
-         //GetUsername(username);
-         //GetTemperature(temperature);
-         //GetWeather(weather);
-         //GetLocation(location);
+        //GetDate(date);
+        //GetCommit(commit);
+        //GetUsername(username);
+        // GetTemperature(temperature);
+        // GetWeather(weather);
+        // GetLocation(location);
 
     }
 
@@ -157,7 +182,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("겨울");
             groundMtl.material = Resources.Load("4Winter/Ground_WT") as Material;
 
-            LawnOBJ[0] = Resources.Load("4Winter/Lawn/  ") as GameObject;
+            LawnOBJ[0] = Resources.Load("4Winter/Lawn/LawnA") as GameObject;
             LawnOBJ[1] = Resources.Load("4Winter/Lawn/LawnB") as GameObject;
 
             FlowerOBJ[0] = Resources.Load("4Winter/Flower/Flower") as GameObject;
